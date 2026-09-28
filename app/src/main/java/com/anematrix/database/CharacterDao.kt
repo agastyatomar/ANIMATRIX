@@ -5,19 +5,18 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.anematrix.model.Character
-import java.util.List
 
 @Dao
 interface CharacterDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCharacter(character: Character)
 
-    @Query("SELECT * FROM character ORDER BY createdAt DESC")
+    @Query("SELECT * FROM characters ORDER BY createdAt DESC")
     suspend fun getAllCharacters(): List<Character>
 
-    @Query("DELETE FROM character")
+    @Query("DELETE FROM characters")
     suspend fun clearAllCharacters()
 
-    @Query("SELECT * FROM character WHERE id = :id")
+    @Query("SELECT * FROM characters WHERE id = :id LIMIT 1")
     suspend fun getCharacterById(id: String): Character?
 }
