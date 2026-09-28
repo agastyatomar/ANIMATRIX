@@ -1,31 +1,19 @@
 <resources>
-    <style name="Theme.ANIMATRIX" parent="Theme.Material.Day.NoActionBar">
-        <item name="colorPrimary">#e94560</item>
-        <item name="colorPrimaryDark">#bd2c3f</item>
-        <item name="colorAccent">#4facfe</item>
-        <item name="colorSecondary">#1f1f1f</item>
-        <item name="colorSecondaryBackground">#252526</item>
-        <item name="colorOnPrimary">#ffffff</item>
-        <item name="colorOnSecondary">#ffffff</item>
+    <style name="Theme.ANIMATRIX" parent="@android:style/Theme.Material.NoActionBar">
+        <item name="android:colorAccent">#4facfe</item>
         <item name="android:windowBackground">#1a1a2e</item>
-        <item name="actionBarStyle">@style/Widget.ANIMATRIX.Toolbar</item>
+        <item name="android:navigationBarColor">#1a1a2e</item>
+        <item name="android:statusBarColor">#bd2c3f</item>
     </style>
 
-    <style name="Widget.ANIMATRIX.Toolbar" parent="Widget.Material.ActionBar">
-        <item name="title">ANIMATRIX</item>
-        <item name="subtitle">Create animations and edit videos</item>
-        <item name="titleTextColor">#ffffff</item>
-        <item name="subtitleTextColor">#bbbbbb</item>
-    </style>
-
-    <style name="Widget.ANIMATRIX.Button" parent="Widget.Material.Button">
+    <style name="Widget.ANIMATRIX.Button" parent="@android:style/Widget.Material.Button">
         <item name="android:textColor">#ffffff</item>
-        <item name="android:background">?attr/colorPrimary</item>
-        <item name="android:padding">"16dp 32dp"</item>
+        <item name="android:background">#e94560</item>
+        <item name="android:padding">16dp</item>
         <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
-    <style name="Widget.ANIMATRIX.TextView" parent="Widget.Material.TextView">
+    <style name="Widget.ANIMATRIX.TextView" parent="@android:style/Widget.Material.TextView">
         <item name="android:textColor">#888888</item>
     </style>
 </resources>
