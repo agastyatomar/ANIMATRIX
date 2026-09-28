@@ -1,14 +1,11 @@
 package com.anematrix
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.seekbar.MaterialSeekBar
+import android.widget.SeekBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.button.MaterialButton
 
 class VideoEditorActivity : AppCompatActivity() {
 
@@ -19,49 +16,39 @@ class VideoEditorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_video_editor)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val seekFrame = findViewById<MaterialSeekBar>(R.id.seekFrame)
+        val seekFrame = findViewById<SeekBar>(R.id.seekFrame)
         val frameText = findViewById<TextView>(R.id.frameText)
-        val playBtn = findViewById<MaterialButton>(R.id.playBtn)
-        val exportBtn = findViewById<MaterialButton>(R.id.exportBtn)
+        val playBtn = findViewById<MaterialButton>(R.id.btnPlay)
+        val exportBtn = findViewById<MaterialButton>(R.id.btnExport)
         val backBtn = findViewById<MaterialButton>(R.id.btnBack)
 
-        // Setup RecyclerView for frames
-        val recyclerView = findViewById<RecyclerView>(R.id.framesRecycler)
-        recyclerView.layoutManager = GridLayoutManager(this, 3)
-        // TODO: Setup frame adapter
-
         seekFrame.max = 30
-        seekFrame.setOnSeekBarChangeListener(object : MaterialSeekBar.OnSeekBarChangeListener {
-            override fun onProgressChanged(seekBar: MaterialSeekBar, progress: Int, fromUser: Boolean) {
+        seekFrame.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(bar: SeekBar?, progress: Int, fromUser: Boolean) {
                 currentFrame = progress
-                frameText.text = "Frame: $progress"
+                frameText.text = "Frame $progress / 30"
             }
-            override fun onStartTrackingTouch(seekBar: MaterialSeekBar) {}
-            override fun onStopTrackingTouch(seekBar: MaterialSeekBar) {}
+            override fun onStartTrackingTouch(bar: SeekBar?) = Unit
+            override fun onStopTrackingTouch(bar: SeekBar?) = Unit
         })
 
         playBtn.setOnClickListener {
             isPlaying = !isPlaying
             playBtn.text = if (isPlaying) "Pause" else "Play"
-            Toast.makeText(this, if (isPlaying) "Playing animation" else "Paused", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, if (isPlaying) "Preview playing" else "Preview paused", Toast.LENGTH_SHORT).show()
         }
 
         exportBtn.setOnClickListener {
-            Toast.makeText(this, "Exporting animation as MP4/GIF...", Toast.LENGTH_SHORT).show()
-            // TODO: Implement export using FFmpeg or Lottie export
+            Toast.makeText(this, "Export pipeline is ready for the next render module", Toast.LENGTH_SHORT).show()
         }
 
-        backBtn.setOnClickListener {
-            finish()
-        }
+        backBtn.setOnClickListener { finish() }
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
+        finish()
         return true
     }
 }
