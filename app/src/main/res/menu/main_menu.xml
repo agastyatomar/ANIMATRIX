@@ -2,12 +2,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_save"
-        android:title="Save"
-        android:icon="@android:drawable/ic_menu_save"
-        android:orderInCategory="100" />
+        android:title="Save character"
+        android:showAsAction="never" />
     <item
         android:id="@+id/action_export"
-        android:title="Export"
-        android:icon="@android:drawable/ic_menu_send"
-        android:orderInCategory="101" />
+        android:title="Video editor"
+        android:showAsAction="never" />
 </menu>
