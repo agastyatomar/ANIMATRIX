@@ -1,102 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#16213e">
+    android:background="@color/background"
+    android:orientation="vertical">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:theme="?attr/actionBarTheme"
-        app:logo="@mipmap/ic_launcher"
-        app:title="ANIMATRIX - Video Editor" />
+        android:background="@color/colorPrimary"
+        android:title="ANIMATRIX • Video Editor"
+        android:titleTextColor="@color/textPrimary" />
 
-    <androidx.core.widget.NestedScrollView
+    <TextView
+        android:id="@+id/frameText"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="Frame 0 / 30"
+        android:textColor="@color/textPrimary"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/framesRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/surface"
+        android:clipToPadding="false"
+        android:padding="12dp" />
+
+    <SeekBar
+        android:id="@+id/seekFrame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="30"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:progress="0" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPlay"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="24dp">
+            android:layout_weight="1"
+            android:text="Play"
+            android:textAllCaps="false" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/framesRecycler"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:background="#0f172a"
-                android:clipToPadding="false"
-                android:paddingBottom="8dp"
-                app:layout_constraintBottom_toTopOf="@id/controls"
-                app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnExport"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:text="Export"
+            android:textAllCaps="false" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#333"
-                app:layout_constraintBottom_toTopOf="@id/controls" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/controls"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#0f172a"
-                app:layout_constraintBottom_toBottomOf="parent">
-
-                <SeekBar
-                    android:id="@+id/seekFrame"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:max="30"
-                    android:progress="0"
-                    android:thumbTint="#e94560"
-                    android:trackTint="#333"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/btnPlay" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnPlay"
-                    style="?attr/btnStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Play"
-                    android:layout_marginStart="8dp"
-                    android:background="?attr/colorPrimary"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/btnExport" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnExport"
-                    style="?attr/btnStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Export"
-                    android:layout_marginStart="8dp"
-                    android:background="?attr/colorSecondary"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraint_end_toStartOf="@id/btnBack" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnBack"
-                    style="?attr/btnStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Back"
-                    android:layout_marginStart="8dp"
-                    android:background="#e94560"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraint_end_toEndOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.core.widget.NestedScrollView>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBack"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:text="Back"
+            android:textAllCaps="false" />
+    </LinearLayout>
+</LinearLayout>
