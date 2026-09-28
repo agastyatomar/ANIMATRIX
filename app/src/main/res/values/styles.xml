@@ -3,6 +3,29 @@
         <item name="colorPrimary">#e94560</item>
         <item name="colorPrimaryDark">#bd2c3f</item>
         <item name="colorAccent">#4facfe</item>
+        <item name="colorSecondary">#1f1f1f</item>
+        <item name="colorSecondaryBackground">#252526</item>
+        <item name="colorOnPrimary">#ffffff</item>
+        <item name="colorOnSecondary">#ffffff</item>
         <item name="android:windowBackground">#1a1a2e</item>
+        <item name="actionBarStyle">@style/Widget.ANIMATRIX.Toolbar</item>
+    </style>
+
+    <style name="Widget.ANIMATRIX.Toolbar" parent="Widget.Material.ActionBar">
+        <item name="title">ANIMATRIX</item>
+        <item name="subtitle">Create animations and edit videos</item>
+        <item name="titleTextColor">#ffffff</item>
+        <item name="subtitleTextColor">#bbbbbb</item>
+    </style>
+
+    <style name="Widget.ANIMATRIX.Button" parent="Widget.Material.Button">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:padding">"16dp 32dp"</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+    <style name="Widget.ANIMATRIX.TextView" parent="Widget.Material.TextView">
+        <item name="android:textColor">#888888</item>
     </style>
 </resources>

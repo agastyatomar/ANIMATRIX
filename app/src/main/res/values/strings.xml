@@ -5,4 +5,5 @@
     <string name="save_btn">Save Character</string>
     <string name="edit_btn">Video Editor</string>
     <string name="version_text">ANIMATRIX v1.0</string>
+    <string name="app_description">Create stick figure animations, edit videos, and save characters with ANIMATRIX</string>
 </resources>
