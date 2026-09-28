@@ -1,9 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">ANIMATRIX</string>
-    <string name="animate_btn">Create Animation</string>
-    <string name="save_btn">Save Character</string>
-    <string name="edit_btn">Video Editor</string>
-    <string name="version_text">ANIMATRIX v1.0</string>
-    <string name="app_description">Create stick figure animations, edit videos, and save characters with ANIMATRIX</string>
 </resources>
