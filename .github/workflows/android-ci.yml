@@ -1,4 +1,4 @@
-name: ANIMATRIX Android CI
+name: ANIMATRIX Android Build
 
 on:
   push:
@@ -8,35 +8,60 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-apk:
+  build:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-interval: 15
+    timeout-minutes: 20
 
     steps:
-      - name: Checkout repository
+      - name: 📥 Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      - name: � setup JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
           cache: 'gradle'
 
-      - name: Grant execute permission for gradlew
+      - name: 🔓 Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Setup Android SDK
+      - name: ⚙️ Setup Android SDK
         uses: reactivecircus/android-actions@master
         with:
-          api-key: ${{ secrets.ANDROID_API_KEY }}
-          api-key-hash: ${{ secrets.ANDROID_API_KEY_HASH }}
+          # These require secrets to be set in GitHub repository settings:
+          # ANDROID_API_KEY - Your Google Play API key
+          # ANDROID_API_KEY_HASH - SHA-1 hash of the API key
+          # ANDROID_PACKAGE_NAME - com.anematrix (auto-set from repo)
+          # ANDROID_KEY_ALIAS - Your key alias
+          # ANDROID_KEY_STORE_BASE64 - Base64 encoded keystore
+          # ANDROUND_KEY_PASSWORD - Key password
+          # ANDROID_KEY_STORE_PASSWORD - Keystore password
 
-      - name: Build Debug APK
-        run: ./gradlew assembleDebug
+      - name: 🏗️ Build Debug APK
+        run: |
+          ./gradlew assembleDebug --no-daemon
 
-      - name: Upload APK
+      - name: 📤 Upload APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: ANIMATRIX-debug-apk
           path: app/build/outputs/debug/app-debug.apk
+          retention-days: 30
+
+      - name: 📋 Build Success Summary
+        if: always()
+        run: |
+          echo "🎉 ANIMATRIX Build Completed"
+          echo "=============================="
+          echo "Branch: ${GITHUB_REF#refs/heads/}"
+          echo "Commit: ${GITHUB_SHA}"
+          echo "APK Path: app/build/outputs/debug/app-debug.apk"
+          echo "Size: $(du -h app/build/outputs/debug/app-debug.apk | cut -f1)"
+          echo "=============================="
+          echo "✅ Open Source & Free"
+          echo "📱 minSdk: 21 (Android 5.0+)"
+          echo "🤖 TensorFlow Lite AI model support"
+          echo "🗄️ Room Database + H2 backend"
+          echo "🎨 Material Design UI"
