@@ -38,7 +38,7 @@ dependencies {
     implementation 'org.tensorflow:tensorflow-lite:2.14.0'
     // Room database for character saving
     implementation "androidx.room:room-ktx:2.5.0"
-    implementation "com.h2database:h2:2.2.284"
+    implementation "com.h2database:h2:2.2.224"
     // Animation libraries
     implementation 'com.airbnb.android:lottie:4.2.0'
 }
