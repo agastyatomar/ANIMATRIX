@@ -1,0 +1,12 @@
+# ANIMATRIX Placeholder Animation
+This placeholder represents the animation system in ANIMATRIX.
+Features:
+- Frame-by-frame animation engine
+- Stick figure animation (inspired by Stick Nodes Pro)
+- Timeline-based animation editor
+- Layer support
+- Onion skinning
+- Export to GIF/MP4
+- AI-assisted frame generation (Tiny ML model)
+- Character saving/loading
+- In-app video editing
