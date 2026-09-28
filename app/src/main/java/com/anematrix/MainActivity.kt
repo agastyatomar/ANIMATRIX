@@ -1,62 +1,37 @@
 package com.anematrix
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import com.airbnb.lottie.LottieAnimationView
-import com.google.android.material.button.MaterialButton
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Toast
+import androidx.activity.ComponentActivity
+import androidx.lifecycle.lifecycleScope
+import com.anematrix.database.CharacterDatabase
+import com.anematrix.model.Character
+import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
+
+    private lateinit var database: CharacterDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        database = CharacterDatabase.getDatabase(this)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-
-        val animateBtn = findViewById<MaterialButton>(R.id.animateBtn)
-        val animationView = findViewById<LottieAnimationView>(R.id.animationView)
-        val saveBtn = findViewById<MaterialButton>(R.id.saveBtn)
-        val editBtn = findViewById<MaterialButton>(R.id.editBtn)
-
-        animateBtn.setOnClickListener {
-            animationView.playAnimation()
-            Toast.makeText(this, "ANIMATRIX - Animation Started", Toast.LENGTH_SHORT).show()
+        findViewById<com.google.android.material.button.MaterialButton>(R.id.animateBtn).setOnClickListener {
+            findViewById<com.airbnb.lottie.LottieAnimationView>(R.id.animationView).playAnimation()
+            Toast.makeText(this, "Animation preview started", Toast.LENGTH_SHORT).show()
         }
 
-        saveBtn.setOnClickListener {
-            // TODO: Implement character saving
-            Toast.makeText(this, "Saving character...", Toast.LENGTH_SHORT).show()
-        }
-
-        editBtn.setOnClickListener {
-            // Navigate to video editor
-            val intent = android.content.Intent(this, VideoEditorActivity::class.java)
-            startActivity(intent)
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.action_save -> {
-                Toast.makeText(this, "Character saved", Toast.LENGTH_SHORT).show()
-                return true
+        findViewById<com.google.android.material.button.MaterialButton>(R.id.saveBtn).setOnClickListener {
+            lifecycleScope.launch {
+                database.characterDao().insertCharacter(Character())
+                Toast.makeText(this@MainActivity, "Character saved", Toast.LENGTH_SHORT).show()
             }
-            R.id.action_export -> {
-                val intent = android.content.Intent(this, VideoEditorActivity::class.java)
-                startActivity(intent)
-                return true
-            }
-            else -> return super.onOptionsItemSelected(item)
+        }
+
+        findViewById<com.google.android.material.button.MaterialButton>(R.id.editBtn).setOnClickListener {
+            startActivity(Intent(this, VideoEditorActivity::class.java))
         }
     }
 }
